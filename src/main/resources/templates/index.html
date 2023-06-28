@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+
+  <script
+          src="https://api-maps.yandex.ru/2.1/?apikey=e0bc5d1d-94da-42f9-a4e0-cd7d994894d1&lang=ru_RU"
+          type="text/javascript"
+  ></script>
+
+  <link rel="stylesheet" href="/static/css/header.css" />
+  <link rel="stylesheet" href="/static/css/mainPage.css" />
+</head>
+<body>
+  <div th:replace="bloks/header :: header"></div>
+  <div id="map" class="map">
+    <div class="sidebar">
+      <div class="bar-element search">
+<!--        <span class="icon-search"></span>-->
+        <input
+                id = "search-input"
+                class="bar-element-search"
+                type="text"
+                placeholder="Поиск маршрута"
+                onkeyup="findRoute()"
+        />
+      </div>
+      <div id="route-list" class="route-list">
+        <div th:each="route : ${routes}" class="todo-task-container">
+          <div th:id="${route.getId()}" class="todo-task todo-task-complete todo-task-changing">
+            <p th:text="${route.getName()}"></p>
+              <div class="route-info"><a th:href="@{/route/{id}(id = ${route.getId()})}">...</a></div>
+          </div>
+
+        </div>
+       </div>
+
+    </div>
+  </div>
+
+
+  <script src="/static/js/script.js"></script>
+
+</body>
+</html>

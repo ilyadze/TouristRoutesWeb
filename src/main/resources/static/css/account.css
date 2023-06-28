@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700,900');
+
+#admin_information{
+    margin-top: 150px;
+    display: block;
+}
+
+#admin_image{
+    float: left;
+    margin: 2.5%;
+    width: 30%;
+    height: 300px;
+    border: 1px solid gray;
+    /*border-radius: 50px;*/
+
+}
+
+#admin_details{
+    float: left;
+    margin: 20px;
+    text-transform: uppercase;
+    font-size: 15px;
+    /*font-style: normal;*/
+    font-family: 'Lato';
+    width: 60%;
+
+
+}
+
+#admin_details label{
+    /*font-size: 1.5em;*/
+    font-weight: 700;
+}
+
+#admin_controls{
+    /*margin: 50px;*/
+    float: left;
+    width: 90%;
+    margin: 5%;
+    margin-top: 3%;
+}
+
+button{
+    background-color: #176655;
+    color: white;
+    height: 30px;
+    border-radius: 4px;
+    outline: none;
+    border: 0px solid white;
+    width: 61%;
+    margin: 0px 2%;
+    letter-spacing: 5px;
+    padding: 5px 0px;
+    text-transform: uppercase;
+    box-shadow: 1px 1px 2px 2px rgba(17,66,55,0.4),
+    -1px -1px 2px 2px rgba(17,66,55,0.4);
+}
+button:hover{
+    background-color: white;
+    color: #176655;
+    box-shadow: 1px 1px 2px 2px rgba(17,66,55,0.4),
+    -1px -1px 2px 2px rgba(17,66,55,0.4);
+}
+
+input[type="text"],input[type="email"]{
+    background-color: transparent;
+    box-shadow: 1px 1px 2px 2px rgba(17,66,55,0.4),
+    -1px -1px 2px 2px rgba(17,66,55,0.4);
+
+    width: 100%;
+    line-height: 2.0;
+    border: 0px solid white;
+    color: #176655;
+    font-size: 15px;
+}
+
+
+
+
+#admin_information *{
+    margin:2%;
+}
+
+table{
+    border: none;
+    background-color: #176655;
+    width: 100%;
+    padding: 10px 40px;
+    font-family: 'Lato';
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 0.5px solid gray;
+
+}
+tr{
+    padding: 0;
+    margin: 0 auto;
+}
+td{
+    color: white;
+    background-color: #176655;
+    padding: 5px 5px;
+    text-align: center;
+    border-radius: 4px;
+}

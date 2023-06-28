@@ -1,0 +1,46 @@
+<div class="header">
+  <header>
+    <nav role="navigation">
+      <ul>
+        <li>
+          <a href="/main">
+            <div>
+              Главная
+
+            </div>
+          </a>
+        </li>
+        <li>
+        <a href="/forum">
+          <div>
+            Форум
+          </div>
+        </a>
+        </li>
+<!--        <li>-->
+<!--          <a href="/contact">-->
+<!--            <div>-->
+<!--              Contact-->
+<!--            </div>-->
+<!--          </a>-->
+<!--        </li>-->
+        <li style="margin-left: 980px">
+          <a href="/profile">
+            <div>
+              Профиль
+            </div>
+          </a>
+          <div>
+          <ul>
+            <li><a href="/profile">Аккаунт</a></li>
+            <li><a href="/routesPage">Маршруты</a></li>
+            <li th:if="${role}"><a href="/usersPage">Пользователи</a></li>
+            <li><a href="/auth/logout">Выход</a></li>
+          </ul>
+        </div>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+</div>

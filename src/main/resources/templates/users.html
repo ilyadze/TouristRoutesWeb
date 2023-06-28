@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/routes.css">
+</head>
+<body>
+    <div th:replace="bloks/header :: header"></div>
+
+    <div class="route-list" id="route-list">
+        <div class="bar-element search">
+            <!--        <span class="icon-search"></span>-->
+            <input
+                    id = "search-input"
+                    class="bar-element-search"
+                    type="text"
+                    placeholder="Поиск пользователя"
+                    onkeyup="findRoute()"
+            />
+        </div>
+        <div class="users" id="users">
+            <div id="${task.id}" class="todo-task-container">
+                <div th:each="user : ${users}" class="route todo-task-complete todo-task-changing">
+                    <p th:text="${user.getUsername()}"></p>
+                    <div class="route-info"><a th:href="@{/usersPage/{id}(id = ${user.getId()})}">...</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/js/users.js"></script>
+</body>
+</html>

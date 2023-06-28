@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script
+            src="https://api-maps.yandex.ru/2.1/?apikey=e0bc5d1d-94da-42f9-a4e0-cd7d994894d1&lang=ru_RU"
+            type="text/javascript"
+    ></script>
+    <link rel="stylesheet" href="/static/css/route.css">
+  <link rel="stylesheet" href="/static/css/header.css" />
+</head>
+<body>
+<div th:replace="bloks/header :: header"></div>
+  <div class="form-deck">
+  <div class="form-row">
+    <div class="map-deck">
+      <div id="map" class="map">
+      </div>
+    </div>
+    <div class="form-container">
+      <h3 class="form-header">Маршрут</h3>
+      <form autocomplete="off"  method="POST" action="/send">
+
+        <p class="single-form">
+          <label for="name">Название</label>
+          <input class="form-control" type="text" id="name" name="name" th:value="${route.getName()}" readonly>
+
+        </p>
+
+        <p class="single-form">
+          <label for="distance">Дистанция</label>
+          <input class="form-control" type="text" id="distance" name="distance" th:value="${route.getDistance()}" readonly>
+
+        </p>
+
+
+        <p class="single-form">
+          <label for="category">Категория</label>
+          <input class="form-control"  id="category" name="category"  th:value="${route.getCategory()}" readonly>
+
+        </p>
+
+        <p class="single-form">
+          <label for="descrition">Описание</label>
+          <textarea  style="resize: none;" class=" " id="descrition" name="message" th:text="${route.getDescription()}"  readonly></textarea>
+
+        </p>
+          <div id="viewContainer"></div>
+
+      </form>
+      <!-- Contenedor Principal -->
+      <div class="comments-container">
+        <h1>Комментарии</h1>
+
+        <ul id="comments-list" class="comments-list">
+          <li th:each="comment : ${comments}">
+            <div class="comment-main-level">
+              <!-- Avatar -->
+<!--              <div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>-->
+              <!-- Contenedor del Comentario -->
+              <div class="comment-box">
+                <div class="comment-head">
+                  <h6 class="comment-name " th:text="${comment.getPerson().getUsername()}">Agustin Ortiz</h6>
+                  <span>
+                      <div class="rating">
+                        <span th:each="starNumber : ${#numbers.sequence(1, 5)}">
+                        <span th:if="${comment.getRating().getValue() >= starNumber}" class="filled" style="color: #ffcc00;">&#9733;</span>
+                        <span th:unless="${comment.getRating().getValue() >= starNumber}" class="empty">&#9734;</span>
+                        </span>
+                    </div>
+                  </span>
+                  <i class="fa fa-reply"></i>
+                  <i class="fa fa-heart"></i>
+                </div>
+                <div  class="comment-content">
+                    <p th:text="${comment.getText()}"></p>
+                </div>
+              </div>
+            </div>
+        </ul>
+        <div class="product-rating">
+          <h3>Комментарий</h3>
+
+          <form action="/comment" method="post" id="comment-form">
+<!--            <input type="hidden" name="id" th:value="${comments.stream().findFirst().get().getPerson().getId()}">-->
+            <input type="hidden" name="id" th:value="${route.getId()}">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <div class="rating">
+              <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 stars"></label>
+              <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 stars"></label>
+              <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 stars"></label>
+              <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 stars"></label>
+              <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 star"></label>
+            </div>
+            <textarea id="comment" name="comment" placeholder="Введите комментарий"></textarea>
+            <button type="submit" id="submit-comment">Добавить</button>
+          </form>
+          <div id="comments"></div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  </div>
+  <script src="/static/js/route.js"></script>
+  <script src="/static/js/showRoute.js"></script>
+    <script src="/static/js/custom-view.js"></script>
+</body>
+</html>

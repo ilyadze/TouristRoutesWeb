@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+  <link rel="stylesheet" href="/static/css/header.css" />
+
+  <link rel="stylesheet" href="/static/css/forum.css" />
+</head>
+<body>
+  <div th:replace="bloks/header :: header"></div>
+  <div class="sidebar">
+    <div class="bar-element search">
+      <!--        <span class="icon-search"></span>-->
+      <input
+              id = "search-input"
+              class="bar-element-search"
+              type="text"
+              placeholder="Поиск чата"
+              onkeyup="findRoute()"
+      />
+    </div>
+    <div id="route-list" class="route-list">
+      <div th:each="topic : ${topics}" id="${task.id}" class="todo-task-container">
+        <div th:id="${topic.getId()}" class="todo-task todo-task-complete todo-task-changing">
+          <a th:href="@{/forum/{id}(id = ${topic.getId()})}">
+            <p th:text="${topic.getTitle()}"></p>
+          </a>
+<!--          <div class="route-info"><a th:href="@{/route/{id}(id = ${route.getId()})}">...</a></div>-->
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <div class="container">
+    <div class="comments-list">
+    <ul id="comments-list" >
+
+      <li th:each="message : ${messages}">
+        <div class="comment-main-level">
+          <!-- Avatar -->
+          <!--              <div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>-->
+          <!-- Contenedor del Comentario -->
+          <div class="comment-box">
+            <div class="comment-head">
+              <h6 class="comment-name " th:text="${message.getPerson().getUsername()}">Agustin Ortiz</h6>
+              <i class="fa fa-reply"></i>
+              <i class="fa fa-heart"></i>
+            </div>
+            <div class="comment-content">
+              <p th:text="${message.getContent()}"></p>
+            </div>
+          </div>
+        </div>
+
+    </ul>
+
+      <div th:if="${messages}" class="product-rating">
+        <h3>Комментарий</h3>
+        <form action="/message" method="post" id="comment-form">
+          <input type="hidden" name="id" th:value="${messages.stream().findFirst().get().getId()}">
+          <textarea id="content" name="content" placeholder="Leave a comment"></textarea>
+          <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+          <button type="submit" id="submit-comment">Добавить</button>
+        </form>
+
+        <div id="comments"></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

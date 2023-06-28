@@ -1,0 +1,98 @@
+.map {
+    position: relative;
+    width: 1440px;
+    height: 787px;
+    background-color: #c6c6c6;
+}
+
+.sidebar {
+    position: absolute;
+    margin-left: 10px;
+    margin-top: 80px;
+    width: 250px;
+    height: 700px;
+    /*background-color: #F5F5F5;*/
+
+    background: rgba(245, 245, 245, 0.4);
+    /*opacity: 0.7;*/
+    backdrop-filter: blur(15px);
+    border-radius: 10px;
+    z-index: 2;
+    overflow-y: scroll;
+}
+
+.todo-task {
+    cursor: default;
+    --size: 36px;
+    display: flex;
+    min-height: var(--size);
+    align-items: center;
+    color: #a19f9d;
+    border: 1px solid transparent;
+    background-color: #FFFFFF;
+    opacity: 1;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.route-list {
+    overflow-y: scroll;
+    width: 250px;
+    height: 600px;
+}
+
+
+.bar-element {
+    cursor: pointer;
+    letter-spacing: 0.25px;
+    position: relative;
+    display: block;
+    line-height: 36px;
+    font-size: 16px;
+    font-family: "PT Serif", serif;
+    font-weight: 400;
+    color: #c6c5c5;
+    border: 1px solid transparent;
+    transition: all 0.3s;
+}
+
+.bar-element:hover {
+    border-color: #00b2b0;
+    border-radius: 10px;
+}
+
+.search {
+    margin: 25px 10px;
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+
+.search input:focus {
+    outline: none;
+}
+
+.bar-element-search {
+    border-radius: 10px;
+    width: 228px;
+    /*margin: 10px;*/
+    line-height: 36px;
+    border: 0;
+}
+
+.route-info {
+    margin-left: auto;
+    margin-right: 0;
+    font-size: 24px;
+    justify-content: center;
+    cursor: pointer;
+    text-align: center;
+    line-height: 36px;
+    color: #c6c5c5;
+    height: 36px;
+    width: 36px;
+    border: 1px solid transparent;
+}
+
+.route-info a {
+    text-decoration: none;
+}

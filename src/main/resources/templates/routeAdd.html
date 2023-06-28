@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script
+          src="https://api-maps.yandex.ru/2.1/?apikey=e0bc5d1d-94da-42f9-a4e0-cd7d994894d1&lang=ru_RU"
+          type="text/javascript"
+  ></script>
+  <link rel="stylesheet" href="/static/css/routePage.css">
+  <link rel="stylesheet" href="/static/css/header.css" />
+</head>
+<body>
+<div th:replace="bloks/header :: header"></div>
+<div class="form-deck">
+  <div class="form-row">
+    <div class="map-deck">
+      <div id="map" class="map">
+      </div>
+    </div>
+    <div class="form-container">
+      <div id="list"></div>
+      <h3 class="form-header" style="margin-left: 180px">Форма для изменения маршрута!</h3>
+      <form autocomplete="off"  th:method="POST" th:action="@{/route/add}" th:object="${route}">
+
+        <p class="single-form">
+          <input class="form-control" type="text" id="name" th:field="${route.name}" name="name"required placeholder=" ">
+          <label for="name">Название</label>
+        </p>
+
+        <p class="single-form">
+          <input class="form-control" type="text" id="distance" name="distance" th:field="${route.distance}"  required placeholder=" ">
+          <label for="distance">Дистанция</label>
+        </p>
+
+<!--        <label for="category">Category</label>-->
+        <p class="single-form">
+          <!--            <input class="form-control"  id="category" name="category" th:value="${route.getCategory()}" required placeholder=" ">-->
+          <!--            <label for="category">Категория</label>-->
+          <select class="form-control" id="category" name="category">
+            <option value="None" th:selected="${route.categorys().contains('None')}">Отсутствует</option>
+            <option value="Attractions" th:selected="${route.categorys().contains('Attractions')}">Достопримичательности</option>
+            <option value="Cafe" th:selected="${route.categorys().contains('Cafe')}">Кафе</option>
+            <option value="Church" th:selected="${route.categorys().contains('Church')}">Церкви</option>
+            <option value="Muzeum" th:selected="${route.categorys().contains('Muzeum')}">Музеи</option>
+          </select>
+        </p>
+
+        <p class="single-form">
+          <textarea  style="resize: none;" class=" " id="description" th:field="${route.description}"  name="message" required></textarea>
+          <label for="description">Описание</label>
+        </p>
+
+<!--        <input class="file-upload" type="file" id="myFile" name="filename" required>-->
+        <button
+                id="submit" class="button button--loading btn-block btn-primary">
+          <span class="btn__text">Сохранить</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+</div>
+<script src="/static/js/addRoute.js"></script>
+</body>
+</html>

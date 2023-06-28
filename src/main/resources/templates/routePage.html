@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script
+          src="https://api-maps.yandex.ru/2.1/?apikey=e0bc5d1d-94da-42f9-a4e0-cd7d994894d1&lang=ru_RU"
+          type="text/javascript"
+  ></script>
+  <link rel="stylesheet" href="/static/css/routePage.css">
+  <link rel="stylesheet" href="/static/css/header.css" />
+<!--    <link rel="stylesheet" href="/static/css/mainPage.css" />-->
+</head>
+<body>
+<div th:replace="bloks/header :: header"></div>
+  <div class="form-deck">
+    <div class="form-row">
+      <div class="map-deck">
+        <div id="map" class="map">
+        </div>
+      </div>
+      <div class="form-container" style="overflow-y: scroll; height: 100%">
+        <h3 class="form-header" style="margin-left: 220px">Форма для изменения маршрута!</h3>
+          <div id="point-view" style="margin-bottom: 50px; margin-left: 90px">
+          </div>
+        <form autocomplete="off"  th:method="POST" th:action="@{/routeEdit/{id}(id = ${route.getId()})}">
+<!--          <input type="hidden" id="csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
+          <input id="csrf" type="hidden" name="_csrf" th:value="${_csrf.token}">
+          <input id="csrf_name" type="hidden" name="_csrf" th:value="${_csrf.headerName}">
+          <p class="single-form">
+            <input class="form-control" type="text" id="name" name="name" th:value="${route.getName()}" required placeholder=" ">
+            <label for="name">Название</label>
+          </p>
+
+          <p class="single-form">
+            <input class="form-control" type="text" id="distance" name="distance" th:value="${route.getDistance()}" required placeholder=" ">
+            <label for="distance">Дистанция</label>
+          </p>
+
+<!--            <label >Категория</label>-->
+          <p class="single-form">
+<!--            <input class="form-control"  id="category" name="category" th:value="${route.getCategory()}" required placeholder=" ">-->
+<!--            <label for="category">Категория</label>-->
+              <select class="form-control" id="category" name="category">
+                  <option value="Attractions" th:selected="${route.categorys().contains('Attractions')}">Достопримичательности</option>
+                  <option value="Cafe" th:selected="${route.categorys().contains('Cafe')}">Кафе</option>
+                  <option value="Church" th:selected="${route.categorys().contains('Church')}">Церкви</option>
+                  <option value="Muzeum" th:selected="${route.categorys().contains('Muzeum')}">Музеи</option>
+                  <option value="Park" th:selected="${route.categorys().contains('Park')}">Парк</option>
+                  <option value="None" th:selected="${route.categorys().contains('None')}">Отсутствует</option>
+              </select>
+          </p>
+
+          <p class="single-form">
+            <textarea  style="resize: none;" class=" " id="description" name="description" th:text="${route.getDescription()}" required></textarea>
+            <label for="description">Описание</label>
+          </p>
+
+<!--          <input class="file-upload" type="file" id="myFile" name="filename" required>-->
+          <button style="margin-left: 160px"
+                  id="submit" class="button button--loading btn-block btn-primary">
+            <span class="btn__text">Сохранить</span>
+          </button>
+        </form>
+          <button style="margin-left: 160px; width: 300px"
+                  type="submit" class="button button--loading btn-block btn-primary">
+              <span class="btn__text"><a th:href="@{/route-delete/{id}(id = ${route.getId()})}">Удалить</a></span>
+          </button>
+      </div>
+    </div>
+
+  </div>
+  <script src="/static/js/editRoute.js"></script>
+</body>
+</html>
